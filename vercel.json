@@ -1,7 +1,9 @@
 {
     "functions": {
-      "memory": 512,
-      "maxDuration": 25
+      "api/*": {
+        "memory": 512,
+        "maxDuration": 25
+      }
     }
   }
   

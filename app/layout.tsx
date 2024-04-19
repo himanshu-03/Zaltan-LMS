@@ -10,8 +10,8 @@ import { ConfettiProvider } from '@/components/providers/confetti-provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Zaltan LMS',
-  description: 'Learning Management System',
+  title: 'Zaltan',
+  description: 'A Learning Management System',
 }
 
 export default function RootLayout({

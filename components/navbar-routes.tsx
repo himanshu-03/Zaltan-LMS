@@ -1,12 +1,13 @@
 "use client";
 
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, useAuth } from "@clerk/nextjs";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { SearchInput } from "./search-input";
 import { SafeProfile } from "@/types";
+import { isTeacher } from "@/lib/teacher";
 
 interface NavbarRoutesProps  {
   currentProfile?: SafeProfile | null
@@ -17,11 +18,11 @@ export const NavbarRoutes : React.FC<NavbarRoutesProps> = ({
 }) => {
   const pathname = usePathname();
   const router = useRouter();
+  const {userId } = useAuth();
 
   const isTeacherPage = pathname?.startsWith("/teacher");
   const isPlayerPage = pathname?.startsWith("/chapter");
   const isSearchPage = pathname === "/search";
-  const isTeacher = currentProfile?.role === "ADMIN" || currentProfile?.role === "TEACHER";
 
   // log the currentprofile
   console.log("Navbar Routes: currentProfile: ", currentProfile);
@@ -42,7 +43,7 @@ export const NavbarRoutes : React.FC<NavbarRoutesProps> = ({
               Exit
             </Button>
           </Link>
-        ) : isTeacher ? (
+        ) : isTeacher(userId) ? (
           <Link href="/teacher/courses">
             <Button size="sm" variant="ghost">
               Teacher Mode

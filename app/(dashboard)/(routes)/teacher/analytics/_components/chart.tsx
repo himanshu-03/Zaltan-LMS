@@ -38,7 +38,7 @@ export const Chart = ({
                         stroke="#888888"
                         tickLine={false}
                         axisLine={false}
-                        tickFormatter={(value) => `$${value}`}
+                        tickFormatter={(value) => `Rs.${value}`}
                     />
                     <Bar 
                         dataKey="total" 

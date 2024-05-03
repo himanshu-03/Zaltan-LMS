@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useTheme } from "../../../components/providers/theme-provider";
+import { useTheme } from "../../../../../components/providers/theme-provider";
 
 export const Logo = () => {
     const { theme } = useTheme();

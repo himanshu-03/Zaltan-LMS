@@ -1,14 +1,22 @@
+// Logo.tsx
+
 import Link from "next/link";
 import Image from "next/image";
-import { useTheme } from "../../../../../components/providers/theme-provider";
+import { useEffect, useState } from "react"; // Import useEffect and useState
 
-export const Logo = () => {
-    const { theme } = useTheme();
+const Logo = () => {
+    const [logoSrc, setLogoSrc] = useState("/light.png"); // State to hold logo source
 
-    const lightLogoSrc = "/light.png";
-    const darkLogoSrc = "/dark.png";
-
-    const logoSrc = theme === "light" ? darkLogoSrc : lightLogoSrc;
+    useEffect(() => {
+        // Import useTheme dynamically to ensure it's only used on the client-side
+        import("../../../../../components/providers/theme-provider").then(({ useTheme }) => {
+            const { theme } = useTheme();
+            const lightLogoSrc = "/light.png";
+            const darkLogoSrc = "/dark.png";
+            const selectedLogoSrc = theme === "light" ? lightLogoSrc : darkLogoSrc;
+            setLogoSrc(selectedLogoSrc); // Set logo source based on theme
+        });
+    }, []); // Run this effect only once on component mount (client-side)
 
     return (
         <>
@@ -23,3 +31,5 @@ export const Logo = () => {
         </>
     );
 };
+
+export default Logo;
